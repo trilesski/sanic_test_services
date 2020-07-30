@@ -55,14 +55,14 @@ async def validation_request(valid_keys, req):
     for x in valid_keys:
         if x[0] not in req.keys():
             VALUE_ERR['massage'] = f'Не найден ключ: {x}'
-            return VALUE_ERR, 400
+            return VALUE_ERR, 405
         else:
             if type(req[x[0]]) != x[1]:
                 VALUE_ERR['massage'] = f'Передан некорректный тип данных в поле: {x[0]}'
-                return VALUE_ERR, 400
+                return VALUE_ERR, 405
 
     for k in req.keys():
         if k not in [x[0] for x in valid_keys]:
             VALUE_ERR['massage'] = f'Некорректный ключ: {k}'
-            return VALUE_ERR, 400
+            return VALUE_ERR, 405
     return None, None

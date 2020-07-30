@@ -1,6 +1,6 @@
 VALUE_ERR = {'response': 'BAD_REQUEST',
              'massage': '',
-             'help': 'Необходимый формат: {"user_id": int, "title": str, "text": str}'}
+             'help': 'Необходимый формат: {"username": int, "password": str, "email": str}'}
 
 DUPLICATE_VALUE = {'response': 'BAD_REQUEST',
                    'massage': 'Пользователь с таким имененм уже существует',

@@ -1,0 +1,107 @@
+swagger: "2.0"
+info:
+  version: "1.0.0"
+  title: "Offers"
+  contact:
+    email: "klochkovy18@gmail.com"
+  license:
+    name: "Users App"
+    url: "http://0.0.0.0:8075"
+host: "0.0.0.0:8075"
+basePath: "/"
+schemes:
+- "http"
+paths:
+  /offer/create:
+    post:
+      tags:
+      - "offers"
+      summary: "Create a new offer to the App"
+      operationId: "addOffer"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/OfferCreate"
+      responses:
+        "201":
+          description: "successful operation"
+        "405":
+          description: "Invalid input"
+  /offer:
+    post:
+      tags:
+      - "offers"
+      summary: "Getting offer"
+      operationId: "getOfferUserID"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/UserID"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ResponseUserID"
+        "405":
+          description: "Invalid input"
+    
+definitions:
+  OfferCreate:
+    type: "object"
+    properties:
+      user_id:
+        type: "integer"
+      title:
+        type: "string"
+      text:
+        type: "string"
+    xml:
+      name: "OfferCreate"
+  OfferID:
+    type: "object"
+    properties:
+      offer_id:
+        type: "integer"
+    xml:
+      name: "OfferID"
+  UserID:
+    type: "object"
+    properties:
+      user_id:
+        type: "integer"
+    xml:
+      name: "OfferID"
+  ResponseUserID:
+    type: "array"
+    items:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+        user_id: 
+          type: "integer"
+        title:
+          type: "string"
+        text:
+          type: "string"
+    xml:
+      name: "ResponseUserID"
+  ResponseOfferID:
+    type: "object"
+    properties:
+      user_id:
+        type: "integer"
+    xml:
+      name: "ResponseOfferID"

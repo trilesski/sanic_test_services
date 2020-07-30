@@ -1,0 +1,140 @@
+swagger: "2.0"
+info:
+  description: ""
+  version: "1.0.0"
+  title: "Users"
+  contact:
+    email: "klochkovy18@gmail.com"
+  license:
+    name: "Users App"
+    url: "http://0.0.0.0:8070"
+host: "0.0.0.0:8070"
+basePath: "/"
+tags:
+- name: "users"
+  description: "Add a new user to the App"
+schemes:
+- "http"
+paths:
+  /users/regisrty:
+    post:
+      tags:
+      - "users"
+      summary: "Add a new user to the App"
+      description: ""
+      operationId: "addUser"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "User object that needs to be registration to the App"
+        required: true
+        schema:
+          $ref: "#/definitions/UserRegistration"
+      responses:
+        "201":
+          description: "successful operation"
+        "400":
+          description: "A user with this name already exists."
+        "405":
+          description: "Invalid input"
+  /users/auth:
+    post:
+      tags:
+      - "users"
+      summary: "Authorization user to the App"
+      description: ""
+      operationId: "authUser"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "User object that needs to be authorization to the App"
+        required: true
+        schema:
+          $ref: "#/definitions/UserRegistration"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ResponseUserAuthorization"
+        "401":
+          description: "Incorrect username or password"
+        "405":
+          description: "Invalid input"
+  /user/{user_id}:
+    get:
+      tags:
+      - "users"
+      summary: "Getting information about a user by his id"
+      description: ""
+      operationId: "gethUser"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "user_id"
+        in: "path"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ResponseUser"
+        "401":
+          description: "Incorrect username or password"
+        "405":
+          description: "Invalid input"
+  
+definitions:
+  ResponseUser:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+      username:
+        type: "string"
+      email:
+        type: "string"
+      password:
+        type: "string"
+    xml:
+      name: "ResponseUser"
+  UserRegistration:
+    type: "object"
+    properties:
+      username:
+        type: "string"
+      email:
+        type: "string"
+      password:
+        type: "string"
+    xml:
+      name: "UserRegistration"
+  UserAuthorization:
+    type: "object"
+    properties:
+      username:
+        type: "string"
+      password:
+        type: "string"
+    xml:
+      name: "UserAuthorization"
+  ResponseUserAuthorization:
+    type: "object"
+    properties:
+      user_id:
+        type: "integer"
+      token:
+        type: "string"
+    xml:
+      name: "ResponseUserAuthorization"
