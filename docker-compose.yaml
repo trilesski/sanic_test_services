@@ -1,0 +1,47 @@
+version: '3'
+
+services:
+
+  db:
+    container_name: postgres
+    image: library/postgres:12
+    restart: always
+    command: postgres -c 'max_connections=1000'
+    environment:
+      POSTGRES_PASSWORD: 'T0x95ZXtK4'
+      POSTGRES_USER: 'devuser'
+      POSTGRES_DB: 'dev'
+    volumes:
+      -  ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+    - 5432:5432
+
+  users:
+    build:
+      context: .
+      dockerfile: deploy/Dockerfile_users
+    volumes:
+      - .:/code
+    environment:
+      POSTGRES_PASSWORD: 'T0x95ZXtK4'
+      POSTGRES_USER: 'devuser'
+      POSTGRES_DB: 'dev'
+      POSTGRES_HOST: 'db'
+    command: python server.py
+    ports:
+      - 8070:8070
+
+  offers:
+    build:
+      context: .
+      dockerfile: deploy/Dockerfile_offers
+    volumes:
+      - .:/code
+    environment:
+      POSTGRES_PASSWORD: 'T0x95ZXtK4'
+      POSTGRES_USER: 'devuser'
+      POSTGRES_DB: 'dev'
+      POSTGRES_HOST: 'db'
+    command: python server.py
+    ports:
+      - 8075:8075
