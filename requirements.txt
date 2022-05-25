@@ -16,7 +16,7 @@ idna-ssl==1.1.0
 immutables==0.14
 multidict==4.7.6
 psycopg2-binary==2.8.5
-PyJWT==1.7.1
+PyJWT==2.4.0
 rfc3986==1.4.0
 sanic==20.6.3
 sniffio==1.1.0
