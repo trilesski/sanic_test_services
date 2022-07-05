@@ -21,7 +21,7 @@ rfc3986==1.4.0
 sanic==20.6.3
 sniffio==1.1.0
 typing-extensions==3.7.4.2
-ujson==3.0.0
+ujson==5.4.0
 urllib3==1.25.10
 uvloop==0.14.0
 websockets==8.1
